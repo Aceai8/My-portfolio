@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My First Website</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+    background-color: #0f172a;
+    color: #e5e7eb;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+    color: #cbd5f5;
+}
+header {
+    margin: 40px 0;
+}
+
+header h1 {
+    letter-spacing: 1px;
+}
+html {
+    scroll-behavior: smooth;
+}
+nav {
+    margin: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #334155;
+}
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #e5e7eb;
+}
+section {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+nav a:hover {
+    color: rgb(132, 141, 132);
+}
+section {
+    margin: 40px auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+}
+.container img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+.container div {
+    background-color: #1e293b;
+    padding: 15px;
+    border-radius: 10px;
+    width: 150px;
+    transition: transform 0.3s ease;
+}
+
+.container div:hover {
+    transform: scale(1.1);
+}
+.container div {
+    background-color: #536056;
+    padding: 15px;
+    border-radius: 10px;
+    width: 150px;
+}
+button {
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+button {
+    background-color: lime;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+@media (max-width: 600px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    section {
+        width: 90%;
+    }
+}
+button:hover {
+    background-color: white;
+}
+    </style>
+</head>
+<body>                                                                                                                    
+<body>
+
+<html><body>
+
+    <header>
+        <h1>ACE 💻</h1>
+        <p>Beginner Web Developer</p>
+    </header>
+
+    <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+    <section>
+        <h2>About Me</h2>
+        <p>I’m learning coding step by step and building real projects.</p>
+    </section>
+
+    <section>
+        <h2>My Projects</h2>
+
+        <div class="container">
+ <div>
+    <img src="https://picsum.photos/150" alt="project image">
+    <h3>Project 1</h3>
+    <p>My first website</p>
+    <button onclick="viewProject()">View</button>
+</div>
+
+        <div>
+    <img src="https://picsum.photos/150" alt="project image">
+    <h3>Project 1</h3>
+    <p>Coming Soon</p>
+    <button onclick="viewProject()">View</button>
+</div>
+        </div>
+
+    </section>
+
+    <section>
+        <h2>Contact</h2>
+        <button onclick="sayHello()">Hire Me</button>
+    </section>
+
+    <footer>
+        <p>© 2026 ACE</p>
+    </footer>
+
+    <script>
+function viewProject() {
+    document.body.style.backgroundColor = "#020617";
+    alert("Opening project soon 🚀");
+}
+</script>
+
+</body>

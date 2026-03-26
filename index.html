@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My First Website</title>
+    <title>TUTORIAL PROJECT</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
-    background-color: #0f172a;
+    background-color: #030e28;
     color: #e5e7eb;
     text-align: center;
     font-family: Arial, sans-serif;
@@ -16,16 +16,59 @@ h1 {
 }
 
 h2 {
-    font-size: 24px;
+    font-size: 10px;
     margin-bottom: 10px;
 }
+.user-box {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
 
+#nameInput {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  flex: 1;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  background: #00bcd4;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #0097a7;
+}
+
+#userList {
+  list-style: none;
+  padding: 0;
+}
+li:hover {
+  transform: scale(1.02);
+  transition: 0.2s;
+}
+#userList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1e1e2f;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+}
 p {
     font-size: 16px;
     color: #cbd5f5;
 }
 header {
-    margin: 40px 0;
+    margin: 100px 0;
 }
 
 header h1 {
@@ -49,7 +92,13 @@ section {
     transform: translateY(20px);
     animation: fadeIn 1s ease forwards;
 }
-
+input {
+    padding: 10px;
+    width: 70%;
+    max-width: 300px;
+    border-radius: 5px;
+    border: none;
+}
 @keyframes fadeIn {
     to {
         opacity: 1;
@@ -57,7 +106,7 @@ section {
     }
 }
 nav a:hover {
-    color: rgb(132, 141, 132);
+    color: rgb(71, 104, 124);
 }
 section {
     margin: 40px auto;
@@ -82,12 +131,17 @@ section {
     width: 150px;
     transition: transform 0.3s ease;
 }
-
+#messages p {
+    background-color: #1e293b;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px;
+}
 .container div:hover {
     transform: scale(1.1);
 }
 .container div {
-    background-color: #536056;
+    background-color: #395969;
     padding: 15px;
     border-radius: 10px;
     width: 150px;
@@ -95,12 +149,15 @@ section {
 button {
     transition: 0.3s;
 }
-
+#messages button {
+    margin-right: 5px;
+    padding: 5px 10px;
+}
 button:hover {
     transform: scale(1.1);
 }
 button {
-    background-color: lime;
+    background-color: rgb(5, 89, 122);
     color: black;
     border: none;
     padding: 10px 20px;
@@ -112,7 +169,30 @@ button {
         flex-direction: column;
         align-items: center;
     }
+#messages div {
+    margin-bottom: 10px;
+}
+li {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+  padding: 10px;
+  background: #1e1e2f;
+  border-radius: 8px;
+}
 
+button {
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+#messages button {
+    background-color: red;
+    color: white;
+    margin-top: 5px;
+}
     section {
         width: 90%;
     }
@@ -128,8 +208,8 @@ button:hover {
 <html><body>
 
     <header>
-        <h1>ACE 💻</h1>
-        <p>Beginner Web Developer</p>
+        <h1>SHY-FIT</h1>
+        <p>SKRR</p>
     </header>
 
     <nav>
@@ -140,11 +220,18 @@ button:hover {
 
     <section>
         <h2>About Me</h2>
-        <p>I’m learning coding step by step and building real projects.</p>
+        <p>NEXT STOP>>>THE TOP.</p>
     </section>
+<h2>User App 🚀</h2>
 
+<div class="user-box">
+  <input type="text" id="nameInput" placeholder="Enter name..." />
+  <button onclick="addUser()">Add User</button>
+</div>
+
+<ul id="userList"></ul>
     <section>
-        <h2>My Projects</h2>
+        <h2>PROJECT</h2>
 
         <div class="container">
  <div>
@@ -164,20 +251,90 @@ button:hover {
 
     </section>
 
-    <section>
-        <h2>Contact</h2>
-        <button onclick="sayHello()">Hire Me</button>
-    </section>
+    <section id="contact">
+    <h2>Contact Me</h2>
+
+    <input type="text" id="name" placeholder="Your name"><br><br>
+    <input type="text" id="message" placeholder="Your message"><br><br>
+
+    <button onclick="sendMessage()">Send</button>
+
+    <div id="messages"></div>
+</section>
 
     <footer>
-        <p>© 2026 ACE</p>
+        <p>© 2026 </p>
     </footer>
+<script>
+// YOUR OTHER CODE (if any stays here)
 
-    <script>
-function viewProject() {
-    document.body.style.backgroundColor = "#020617";
-    alert("Opening project soon 🚀");
+// 🔥 GET USERS
+async function getUsers() {
+  const res = await fetch("http://localhost:3000/users");
+  const data = await res.json();
+
+  const list = document.getElementById("userList");
+  list.innerHTML = "";
+
+  data.forEach(user => {
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+  <span>${user.name}</span>
+  <div>
+    <button onclick="editUser(${user.id})">Edit</button>
+    <button onclick="deleteUser(${user.id})">Delete</button>
+  </div>
+`;
+
+    list.appendChild(li);
+  });
 }
+async function editUser(id) {
+  const newName = prompt("Enter new name:");
+
+  if (!newName) return;
+
+  await fetch(`http://localhost:3000/users/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ name: newName })
+  });
+
+  getUsers();
+}
+// 🔥 ADD USER
+async function addUser() {
+  const input = document.getElementById("nameInput");
+  const name = input.value;
+
+  await fetch("http://localhost:3000/users", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ name })
+  });
+
+  input.value = "";
+  getUsers();
+}
+
+// 🔥 DELETE USER
+async function deleteUser(id) {
+  await fetch(`http://localhost:3000/users/${id}`, {
+    method: "DELETE"
+  });
+
+  getUsers();
+}
+
+// 🔥 LOAD USERS WHEN PAGE OPENS
+getUsers();
 </script>
+    
 
 </body>
+</html>
